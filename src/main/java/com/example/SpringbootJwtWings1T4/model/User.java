@@ -25,7 +25,7 @@ public class User implements UserDetails {
     @Column
     private String pass;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     private Role role;
 
@@ -33,6 +33,14 @@ public class User implements UserDetails {
         this.id = id;
         this.email = email;
         this.pass = pass;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public User() {
