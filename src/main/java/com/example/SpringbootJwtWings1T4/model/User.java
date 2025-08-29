@@ -10,12 +10,12 @@ import java.util.List;
 
 @Entity
 @Table(name="my_user")
-/*This User is JPA entity but to make it as a Spring boot user what spring people have done is they given some readymate
-of interface as they tell us please implements this interface and I will be scanning this interface
+/*This User is JPA entity but to make it as a Spring boot user what spring people have done is they given some
+ready mate of interface as they tell us please implements this interface and I will be scanning this interface
 for my spring security and I will know that I have  to perform this function using the interfaces only.
  so to make this JPA user to spring boot user we have to implement this interface that is UserDetails.
- now UserDetails will handle all the operations related to Users and Role earlier it was handle by JPA manager. so it best pracftie
- to implements UserDetails on top of User JPA entity*/
+ now UserDetails will handle all the operations related to Users and Role earlier it was handled by JPA manager.
+ so it best practice to implements UserDetails on top of User JPA entity*/
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

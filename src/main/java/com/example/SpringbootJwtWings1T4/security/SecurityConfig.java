@@ -41,15 +41,18 @@ public class SecurityConfig {
         return (web) -> web.ignoring().requestMatchers("/h2-console/**");
     }
 
-    //now we need to add that authentication filter in the security filter chain as well and also need to authorize the request
+    //now we need to add that authentication filter in the security filter chain as well and also need
+    // to authorize the request
     //all the public and secured endpoint
     @Bean
     SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         //Step 1: Disable CSRF Protection
         httpSecurity.csrf(csrf->csrf.disable());
 
-        //as we don't want to save any information of the user in the application  we are saving it in our database only and security Context but we are not storing
-        //any cookies or sessionInformation in the application so we need to change the sessionManagement policy
+        //as we don't want to save any information of the user in the application  we are saving it in
+        // our database only and security Context but we are not storing
+        //any cookies or sessionInformation in the application so we need to change the
+        // sessionManagement policy
         //step2: Session Management
         httpSecurity.sessionManagement(
                 sessionConfig->sessionConfig.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
@@ -57,13 +60,16 @@ public class SecurityConfig {
         httpSecurity.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         //Step4: Register
-        //Public handler- for this we have created bean for that liek Authentication manager or Authentication provider
-        //so we need to autowire this as well as it will be handle public APIs so we need to register this as well
+        //Public handler- for this we have created bean for that liek Authentication manager or
+        // Authentication provider
+        //so we need to autowire this as well as it will be handle public APIs so we need to register
+        // this as well
         httpSecurity.authenticationProvider(authenticationProvider());
 
         //protected resources
         httpSecurity.authorizeHttpRequests(httpConfig->{
-            //the request which are matching with WHITE_LIST_URL will be permitted and rest any other request need to be authenticated
+            //the request which are matching with WHITE_LIST_URL will be permitted and rest any
+            // other request need to be authenticated
             httpConfig.requestMatchers(WHITE_LIST_URL).permitAll()
                     .requestMatchers("/api/**").hasAnyAuthority("USER")
                     .requestMatchers(HttpMethod.POST,"/leave/user").hasAnyAuthority("USER")

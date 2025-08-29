@@ -20,9 +20,9 @@ public class LeaveController {
     @PostMapping("/user")
     public ResponseEntity<Object> addLeaveRequest(@RequestHeader("Authorization") String authHeader,
                                                   @RequestBody LeaveRequest leaveReq) {
-        //by looking at this request we are not sure who is currently trying to access it sop we need to accept token
-        //and from that token we will find the user and then the role associate with it
-        //so we are gonna extract the header details from the token
+        //by looking at this request we are not sure who is currently trying to access it so we need to
+        // accept token and from that token we will find the user and then the role associate with it,
+        //so we are going to extract the header details from the token
         //check what part of header is relevant for us
        String jwt =  authHeader.substring(7);
         //this username we can extract at service layer as well but we are doing it here its fine

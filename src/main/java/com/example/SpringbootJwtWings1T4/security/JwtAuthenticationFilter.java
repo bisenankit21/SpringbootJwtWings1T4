@@ -18,9 +18,12 @@ import java.io.IOException;
 
 @Component
 
-/*The role of this authentication filter is accept the incoming request and check whether the rquest has
-* token or not, extract that token if you find it and if that is the JWT or BEARER token then it will process the request
-* or if that request has no JWT token then it will direct pass it to the next filter in filter chain and not process it, it will process only when the incoming request has JWT token*/
+/*The role of this authentication filter is accept the incoming request and check whether the request has
+* token or not, extract that token if you find it and if that is the JWT or BEARER token then it will
+* process the request
+* or if that request has no JWT token then it will direct pass it to the next filter in filter chain and
+*  not
+* process it, it will process only when the incoming request has JWT token*/
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Autowired
@@ -46,7 +49,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         also create the authentication object this authentication object is stored in the class
         SecurityContextHolder which is responsible to hold the authentication object.
         so first we need to check that the particular user is authenticate or not.
-        if this SecurityContextHolder.getContext().getAuthentication()==null it means we can say our user is not
+        if this SecurityContextHolder.getContext().getAuthentication()==null it means we can say our use
+         is not
         authenticated so we need to make it authenticated*/
 
         //User not authenticated
@@ -55,16 +59,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             //validate the token
             if(userDb !=null && jwtUtil.validateToken(jwtToken,userDb)){
                 //Register my current user in the security context
-                UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-                        userDb,null, userDb.getAuthorities());
+                UsernamePasswordAuthenticationToken authenticationToken = new
+                        UsernamePasswordAuthenticationToken(userDb,null, userDb.getAuthorities());
 
-                authenticationToken.setDetails(new WebAuthenticationDetails(request));  //non mendate
+                authenticationToken.setDetails(new WebAuthenticationDetails(request));  //non mandate
                 //update my user as valid user
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             }
 
         }
-        //if the user is already authenticated then no need to make it authenticate just pass it to the filter chain
+        //if the user is already authenticated then no need to make it authenticate just pass it to the
+        // filter chain
 
         //continue filter chain
         filterChain.doFilter(request,response);

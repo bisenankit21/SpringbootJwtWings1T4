@@ -17,7 +17,9 @@ public class JwtUtil {
    // @Autowired
    // UserDetailsService userDetailsService;
 
-    //in the latest springboot we need this secret key have more then 256 bits length so just replace the given secret key with this value
+    //in the latest spring boot we need this secret key have more then 256 bits length so just replace the
+    // given
+    // secret key with this value
     private final static String SECRET_KEY = "ThisIsASecretKeyThisIsASecretKeyThisIsASecretKey";
 
     private final static long EXPIRATION_TIME = 24*60*60*1001;//in millisecond
@@ -25,8 +27,10 @@ public class JwtUtil {
   //Decoding or Parsing part
 
     public Claims extractAllClaims(String token){
-        //once you are extracting you are parsing the token and once you are creating the you will be using builder
-        //secondly we need to set the secret key even if we are creating the token or extracting from the token
+        //once you are extracting you are parsing the token and once you are creating the you will be using
+        // builder
+        //secondly we need to set the secret key even if we are creating the token or extracting from the
+        // token
         //in the latest springboot version we need to build the parser
         return Jwts.parser().setSigningKey(SECRET_KEY).build().parseClaimsJws(token).getBody();
     }
@@ -49,7 +53,8 @@ public class JwtUtil {
         //JWTs is for JWT service
         //we are using HS256 because our secret key is 256 bit key
         return Jwts.builder().signWith(SignatureAlgorithm.HS256,SECRET_KEY)
-                //as we dont need extra claim so just pass the empty has set to the claims or we also can skip this but betterr to use this
+                //as we dont need extra claim so just pass the empty has set to the claims or we also can
+                // skip this but betterr to use this
                 .addClaims(new HashMap<>())
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))

@@ -25,7 +25,7 @@ public class LeaveService {
         try{
            Optional<User> userOpn= getUserFromUsername(username);
            if(userOpn.isEmpty()){
-               //Sanity Check #1 : user Does not exists.
+               //Sanity Check #1 : user Does not exist.
                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found: LeaveRequest");
            }
             //Sanity check no.2 : this will tell this user have which role. Role Sanity check
